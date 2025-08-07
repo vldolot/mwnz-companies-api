@@ -3,9 +3,9 @@ import { companyService, CompanyNotFoundError } from '../services/company.servic
 import type { APIError, Company } from '../types/company.types';
 
 export class CompanyController {
-  async getCompany({ params: { id }, set }: Context<{ params: { id: number }, set: any }>): Promise<Company | APIError> {
+  async getCompany({ params: { id }, set }: Context<{ params: { id: string }, set: any }>): Promise<Company | APIError> {
     try {
-      return await companyService.getCompanyById(id.toString());
+      return await companyService.getCompanyById(id);
     } catch (error) {
       if (error instanceof CompanyNotFoundError) {
         set.status = 404;
